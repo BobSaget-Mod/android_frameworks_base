@@ -62,7 +62,6 @@ import android.util.Slog;
 import android.util.Xml;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.android.internal.statusbar.StatusBarNotification;
@@ -520,7 +519,7 @@ public class NotificationManagerService extends INotificationManager.Stub
 
             boolean queryRestart = false;
             boolean packageChanged = false;
-            
+
             if (action.equals(Intent.ACTION_PACKAGE_REMOVED)
                     || action.equals(Intent.ACTION_PACKAGE_RESTARTED)
                     || (packageChanged=action.equals(Intent.ACTION_PACKAGE_CHANGED))
@@ -1537,7 +1536,6 @@ public class NotificationManagerService extends INotificationManager.Stub
                 }
                 pw.println("  ");
             }
-
         }
 
         synchronized (mNotificationList) {
