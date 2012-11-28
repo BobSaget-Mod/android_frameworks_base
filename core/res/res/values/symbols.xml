@@ -1828,7 +1828,10 @@
 
   <!-- SABERMODS START -->
   <eat-comment />
-  
+
+  <!-- Config.xml entries -->
+  <java-symbol type="integer" name="config_backKillTimeout" />
+
   <!-- Power menu -->
   <java-symbol type="drawable" name="ic_lock_reboot" />
   <java-symbol type="drawable" name="ic_lock_screenshot" />
@@ -1845,5 +1848,8 @@
   <java-symbol type="array" name="shutdown_reboot_options" />
   <java-symbol type="string" name="reboot_progress" />
   <java-symbol type="string" name="reboot_system" />
+  
+  <!-- Developer settings - Kill app back press -->
+  <java-symbol type="string" name="app_killed_message" />
   <!-- SABERMODS END -->
 </resources>
