@@ -2808,13 +2808,6 @@ public final class Settings {
         public static final String EXPANDED_BRIGHTNESS_MODE = "expanded_brightness_mode";
 
         /**
-         * Notification Power Widget - Custom LTE Toggle
-         * 1 - lte on, 0 - lte off
-         * @hide
-         */
-        public static final String LTE_MODE = "lte_mode";
-
-        /**
          * Notification Power Widget - Custom Screen Timeout
          * @hide
          */
@@ -2831,6 +2824,41 @@ public final class Settings {
          * @hide
          */
         public static final String EXPANDED_FLASH_MODE = "expanded_flash_mode";
+
+        /**
+         * Quick Settings Panel Tiles to Use
+         *
+         * @hide
+         */
+        public static final String QUICK_SETTINGS_TILES = "quick_settings_tiles";
+
+        /**
+         * Quick Settings Panel Dynamic Tiles
+         *
+         * @hide
+         */
+        public static final String QS_DYNAMIC_ALARM = "qs_dyanmic_alarm";
+
+        /**
+         * Quick Settings Panel Dynamic Tiles
+         *
+         * @hide
+         */
+        public static final String QS_DYNAMIC_BUGREPORT = "qs_dyanmic_bugreport";
+
+        /**
+         * Quick Settings Panel Dynamic Tiles
+         *
+         * @hide
+         */
+        public static final String QS_DYNAMIC_IME = "qs_dyanmic_ime";
+
+        /**
+         * Quick Settings Panel Dynamic Tiles
+         *
+         * @hide
+         */
+        public static final String QS_DYNAMIC_WIFI = "qs_dyanmic_wifi";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
