@@ -48,6 +48,7 @@ import com.android.systemui.quicksettings.UserTile;
 import com.android.systemui.quicksettings.VibrationModeTile;
 import com.android.systemui.quicksettings.WiFiDisplayTile;
 import com.android.systemui.quicksettings.WiFiTile;
+import com.android.systemui.quicksettings.WifiAPTile;
 
 public class QuickSettingsController {
     private static String TAG = "QuickSettingsController";
@@ -120,6 +121,7 @@ public class QuickSettingsController {
     public static final int BUG_REPORT_TILE = 16;
     public static final int WIFI_DISPLAY_TILE = 17;
     public static final int FLASHLIGHT_TILE = 18;
+    public static final int WIFIAP_TILE = 19;
     public static final int USER_TILE = 99;
     private InputMethodTile IMETile;
 
@@ -166,7 +168,7 @@ public class QuickSettingsController {
             } else if (tile.equals(TILE_SYNC)) {
                 // Not available yet
             } else if (tile.equals(TILE_WIFIAP)) {
-                // Not available yet
+                mQuickSettings.add(WIFIAP_TILE);
             } else if (tile.equals(TILE_SCREENTIMEOUT)) {
                 // Not available yet
             } else if (tile.equals(TILE_MOBILEDATA)) {
@@ -315,6 +317,10 @@ public class QuickSettingsController {
             case FLASHLIGHT_TILE:
                 qs = new FlashLightTile(mContext, inflater,
                         (QuickSettingsContainerView) mContainerView, this, mHandler);
+                break;
+            case WIFIAP_TILE:
+                qs = new WifiAPTile(mContext, inflater,
+                        (QuickSettingsContainerView) mContainerView, this);
                 break;
             }
             if (qs != null) {
