@@ -64,7 +64,8 @@ public class RingerVibrationModeTile extends QuickSettingsTile {
         mSoundModesChangedObserver = new SoundModesChangedObserver(mHandler);
         mSoundModesChangedObserver.startObserving();
 
-        onClick = new View.OnClickListener() {
+        // Tile actions
+        mOnClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toggleState();
@@ -72,7 +73,7 @@ public class RingerVibrationModeTile extends QuickSettingsTile {
             }
         };
 
-        onLongClick = new OnLongClickListener() {
+        mOnLongClick = new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 startSettingsActivity(android.provider.Settings.ACTION_SOUND_SETTINGS);
