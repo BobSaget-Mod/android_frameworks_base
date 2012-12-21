@@ -49,6 +49,7 @@ import com.android.systemui.quicksettings.QuickSettingsTile;
 import com.android.systemui.quicksettings.RingerModeTile;
 import com.android.systemui.quicksettings.RingerVibrationModeTile;
 import com.android.systemui.quicksettings.SleepScreenTile;
+import com.android.systemui.quicksettings.SyncTile;
 import com.android.systemui.quicksettings.ToggleLockscreenTile;
 import com.android.systemui.quicksettings.UserTile;
 import com.android.systemui.quicksettings.VibrationModeTile;
@@ -93,8 +94,6 @@ public class QuickSettingsController {
     public static final String TILE_MEDIA_PLAY_PAUSE = "toggleMediaPlayPause";
     public static final String TILE_MEDIA_PREVIOUS = "toggleMediaPrevious";
     public static final String TILE_MEDIA_NEXT = "toggleMediaNext";
-    public static final String TILE_LTE = "toggleLte";
-    public static final String TILE_WIMAX = "toggleWimax";
 
     private static final String TILE_DELIMITER = "|";
     private static final String TILES_DEFAULT = TILE_USER
@@ -137,6 +136,7 @@ public class QuickSettingsController {
     public static final int WIFI_DISPLAY_TILE = 17;
     public static final int FLASHLIGHT_TILE = 18;
     public static final int WIFIAP_TILE = 19;
+    public static final int SYNC_TILE = 20;
     public static final int USER_TILE = 99;
     private InputMethodTile IMETile;
 
@@ -181,7 +181,7 @@ public class QuickSettingsController {
             } else if (tile.equals(TILE_SOUND)) {
                 mQuickSettings.add(SOUND_VIBRATION_TILE);
             } else if (tile.equals(TILE_SYNC)) {
-                // Not available yet
+                mQuickSettings.add(SYNC_TILE);
             } else if (tile.equals(TILE_WIFIAP)) {
                 mQuickSettings.add(WIFIAP_TILE);
             } else if (tile.equals(TILE_SCREENTIMEOUT)) {
@@ -205,10 +205,6 @@ public class QuickSettingsController {
             } else if (tile.equals(TILE_MEDIA_PREVIOUS)) {
                 // Not available yet
             } else if (tile.equals(TILE_MEDIA_NEXT)) {
-                // Not available yet
-            } else if (tile.equals(TILE_WIMAX)) {
-                // Not available yet
-            } else if (tile.equals(TILE_LTE)) {
                 // Not available yet
             }
         }
@@ -411,6 +407,10 @@ public class QuickSettingsController {
                 break;
             case WIFIAP_TILE:
                 qs = new WifiAPTile(mContext, inflater,
+                        (QuickSettingsContainerView) mContainerView, this);
+                break;
+            case SYNC_TILE:
+                qs = new SyncTile(mContext, inflater,
                         (QuickSettingsContainerView) mContainerView, this);
                 break;
             }
