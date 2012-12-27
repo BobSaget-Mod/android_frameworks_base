@@ -593,8 +593,7 @@ class QuickSettings {
         batteryTile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-                pm.goToSleep(SystemClock.uptimeMillis());
+                startSettingsActivity(android.provider.Settings.ACTION_DISPLAY_SETTINGS);
             }
         });
         batteryTile.setOnLongClickListener(new View.OnLongClickListener() {
