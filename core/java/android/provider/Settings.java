@@ -2745,6 +2745,8 @@ public final class Settings {
          */
         public static final String NAVIGATION_BUTTON_GLOW_COLOR = "navigation_button_glow_color";
 
+
+
         /**
          * Battery warning preferences
          *
@@ -2852,6 +2854,13 @@ public final class Settings {
          * @hide
          */
         public static final String QS_DYNAMIC_IME = "qs_dyanmic_ime";
+
+        /**
+         * Quick Settings Panel Dynamic Tiles
+         *
+         * @hide
+         */
+        public static final String QS_DYNAMIC_USBTETHER = "qs_dyanmic_usbtether";
 
         /**
          * Quick Settings Panel Dynamic Tiles
