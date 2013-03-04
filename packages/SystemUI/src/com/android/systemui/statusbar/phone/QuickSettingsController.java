@@ -40,6 +40,7 @@ import static com.android.internal.util.sm.QSConstants.TILE_VOLUME;
 import static com.android.internal.util.sm.QSConstants.TILE_WIFI;
 import static com.android.internal.util.sm.QSConstants.TILE_WIFIAP;
 import static com.android.internal.util.sm.QSUtils.deviceSupportsBluetooth;
+import static com.android.internal.util.sm.QSUtils.deviceSupportsImeSwitcher;
 import static com.android.internal.util.sm.QSUtils.deviceSupportsTelephony;
 import static com.android.internal.util.sm.QSUtils.deviceSupportsUsbTether;
 
@@ -217,7 +218,7 @@ public class QuickSettingsController {
             qs.setupQuickSettingsTile();
             mQuickSettingsTiles.add(qs);
         }
-        if (Settings.System.getInt(resolver, Settings.System.QS_DYNAMIC_IME, 1) == 1) {
+        if (deviceSupportsImeSwitcher(mContext) && Settings.System.getInt(resolver, Settings.System.QS_DYNAMIC_IME, 1) == 1) {
             mIMETile = new InputMethodTile(mContext, inflater, mContainerView, this);
             mIMETile.setupQuickSettingsTile();
             mQuickSettingsTiles.add(mIMETile);
