@@ -36,6 +36,7 @@ import static com.android.internal.util.sm.QSConstants.TILE_SLEEP;
 import static com.android.internal.util.sm.QSConstants.TILE_SYNC;
 import static com.android.internal.util.sm.QSConstants.TILE_TORCH;
 import static com.android.internal.util.sm.QSConstants.TILE_USER;
+import static com.android.internal.util.sm.QSConstants.TILE_VOLUME;
 import static com.android.internal.util.sm.QSConstants.TILE_WIFI;
 import static com.android.internal.util.sm.QSConstants.TILE_WIFIAP;
 import static com.android.internal.util.sm.QSUtils.deviceSupportsBluetooth;
@@ -77,6 +78,7 @@ import com.android.systemui.quicksettings.ToggleLockscreenTile;
 import com.android.systemui.quicksettings.TorchTile;
 import com.android.systemui.quicksettings.UsbTetherTile;
 import com.android.systemui.quicksettings.UserTile;
+import com.android.systemui.quicksettings.VolumeTile;
 import com.android.systemui.quicksettings.WiFiDisplayTile;
 import com.android.systemui.quicksettings.WiFiTile;
 import com.android.systemui.quicksettings.WifiAPTile;
@@ -188,6 +190,8 @@ public class QuickSettingsController {
                 // Not available yet
             } else if (tile.equals(TILE_QUIETHOURS)) {
                 qs = new QuietHoursTile(mContext, inflater, mContainerView, this);
+            } else if (tile.equals(TILE_VOLUME)) {
+                qs = new VolumeTile(mContext, inflater, mContainerView, this, mHandler);
             }
             if (qs != null) {
                 qs.setupQuickSettingsTile();
