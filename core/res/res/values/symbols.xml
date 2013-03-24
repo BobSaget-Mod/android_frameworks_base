@@ -1857,7 +1857,7 @@
   <!-- Notification light -->
   <java-symbol type="array" name="notification_light_package_mapping" />
 
-  <!-- Navigation Ring -->
+ <!-- Navigation Ring -->
   <java-symbol type="drawable" name="ic_navigation_ring_blank_normal" />
   <java-symbol type="drawable" name="ic_navigation_ring_blank_activated" />
   <java-symbol type="drawable" name="ic_navigation_ring_empty" />
@@ -1870,6 +1870,9 @@
   <java-symbol type="drawable" name="ic_navigation_ring_torch_on" />
   <java-symbol type="drawable" name="ic_navigation_ring_torch_off" />
   <java-symbol type="drawable" name="ic_navigation_ring_vibrate" />
+
+  <!-- Panel auto brightness -->
+  <java-symbol type="integer" name="config_panelAutoBrightnessValue" />
 
   <!-- Pie Controls -->
   <java-symbol type="bool" name="config_allowPieService" />
