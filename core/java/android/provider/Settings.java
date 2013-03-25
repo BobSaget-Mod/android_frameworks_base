@@ -2329,9 +2329,9 @@ public final class Settings {
         public static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
 
        /** Volume Adjust Sounds Enable, This is the noise made when using volume hard buttons
-        * Defaults to 1 - sounds enabled
-        * @hide
-        */
+         * Defaults to 1 - sounds enabled
+         * @hide
+         */
         public static final String VOLUME_ADJUST_SOUNDS_ENABLED = "volume_adjust_sounds_enabled";
 
         /**
@@ -2339,6 +2339,12 @@ public final class Settings {
          * @hide
          */
         public static final String VOLBTN_MUSIC_CONTROLS = "volbtn_music_controls";
+
+        /**
+         * Whether power menu expanded desktop is enabled
+         * @hide
+         */
+        public static final String POWER_MENU_EXPANDED_DESKTOP_ENABLED = "power_menu_expanded_desktop_enabled";
         
         /**
          * Display style of AM/PM next to clock in status bar
