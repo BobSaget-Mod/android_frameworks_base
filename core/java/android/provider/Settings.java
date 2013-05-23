@@ -2620,6 +2620,12 @@ public final class Settings {
         public static final String STATUSBAR_BATTERY_BAR_ANIMATE = "statusbar_battery_bar_animate";
 
         /**
+         * Whether it should show charging led or not
+         * @hide
+         */
+        public static final String CHARGING_LED_ENABLED ="charging_led_enabled";
+
+        /**
          * Custom navring actions
          *
          * @hide
@@ -2732,7 +2738,8 @@ public final class Settings {
             POWER_MENU_SCREENSHOT_ENABLED,
             POWER_MENU_REBOOT_ENABLED,
             POWER_MENU_AIRPLANE_ENABLED,
-            POWER_MENU_SILENT_ENABLED
+            POWER_MENU_SILENT_ENABLED,
+            CHARGING_LED_ENABLED
         };
 
         // Settings moved to Settings.Secure
