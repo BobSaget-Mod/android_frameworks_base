@@ -2626,6 +2626,12 @@ public final class Settings {
         public static final String CHARGING_LED_ENABLED ="charging_led_enabled";
 
         /**
+         * Whether the low battery led pulses while not charging or not
+         * @ hide
+         */
+        public static final String LOW_BATTERY_LED_PULSE_ENABLED ="low_battery_led_pulse_enabled";
+
+        /**
          * Custom navring actions
          *
          * @hide
@@ -2739,7 +2745,8 @@ public final class Settings {
             POWER_MENU_REBOOT_ENABLED,
             POWER_MENU_AIRPLANE_ENABLED,
             POWER_MENU_SILENT_ENABLED,
-            CHARGING_LED_ENABLED
+            CHARGING_LED_ENABLED,
+            LOW_BATTERY_LED_PULSE_ENABLED
         };
 
         // Settings moved to Settings.Secure

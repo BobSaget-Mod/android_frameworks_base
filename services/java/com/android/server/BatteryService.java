@@ -153,6 +153,7 @@ public final class BatteryService extends Binder {
     private int mQuietHoursEnd = 0;
     private boolean mQuietHoursDim = true;
     private boolean mBatteryLedEnabled = false;
+    private boolean mLowBatteryLedPulseEnabled = true;
 
     public BatteryService(Context context, LightsService lights) {
         mContext = context;
@@ -722,15 +723,24 @@ public final class BatteryService extends Binder {
             final int status = mBatteryStatus;
 
             if (inQuietHours() && mQuietHoursDim) {
-                if (level < mLowBatteryWarningLevel &&
-                        status != BatteryManager.BATTERY_STATUS_CHARGING) {
-                    // The battery is low, the device is not charging - ignore Quiet Hours
+                if ((level < mLowBatteryWarningLevel &&
+                        status != BatteryManager.BATTERY_STATUS_CHARGING) && mLowBatteryLedPulseEnabled == true) {
+                    // The battery is low, the device is not charging and Low Battery Led Pulse is Enabled - ignore Quiet Hours
                     mBatteryLight.setFlashing(mBatteryLowARGB, LightsService.LIGHT_FLASH_TIMED,
                             mBatteryLedOn, mBatteryLedOff);
                 } else {
-                    // No lights if in Quiet Hours and battery not low
+                    // No lights if in Quiet Hours, battery not low and Low Battery Led Pulse is Disabled
                     mBatteryLight.turnOff();
                 }
+            } else if ((level < mLowBatteryWarningLevel &&
+                           status != BatteryManager.BATTERY_STATUS_CHARGING) && mLowBatteryLedPulseEnabled == true) {
+                       // The battery is low, the device is not charging and Low Battery Led Pulse is Enabled
+                       mBatteryLight.setFlashing(mBatteryLowARGB, LightsService.LIGHT_FLASH_TIMED,
+                               mBatteryLedOn, mBatteryLedOff);
+            } else if ((level < mLowBatteryWarningLevel &&
+                           status != BatteryManager.BATTERY_STATUS_CHARGING) && mLowBatteryLedPulseEnabled == false) {
+                      // No lights if the battery is low, the device is not charging and Low Battery Led Pulse is disabled
+                      mBatteryLight.turnOff();
             } else if (level < mLowBatteryWarningLevel && mBatteryLedEnabled == true) {
                 if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
                     // Battery is charging and low
@@ -773,6 +783,10 @@ public final class BatteryService extends Binder {
             // Charging LED
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.CHARGING_LED_ENABLED), false, this);
+
+            // Low battery LED pulse
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOW_BATTERY_LED_PULSE_ENABLED), false, this);
             update();
         }
 
@@ -793,9 +807,12 @@ public final class BatteryService extends Binder {
                     Settings.System.QUIET_HOURS_END, 0, UserHandle.USER_CURRENT_OR_SELF);
             mQuietHoursDim = Settings.System.getIntForUser(resolver,
                     Settings.System.QUIET_HOURS_DIM, 0, UserHandle.USER_CURRENT_OR_SELF) != 0;
+
+            // LED behaviour
             mBatteryLedEnabled = Settings.System.getIntForUser(resolver,
                     Settings.System.CHARGING_LED_ENABLED,0,UserHandle.USER_CURRENT_OR_SELF) !=0;
-
+            mLowBatteryLedPulseEnabled = Settings.System.getIntForUser(resolver,
+                    Settings.System.LOW_BATTERY_LED_PULSE_ENABLED,0,UserHandle.USER_CURRENT_OR_SELF) !=0;
             updateLedPulse();
         }
     }
