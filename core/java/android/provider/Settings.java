@@ -2956,6 +2956,15 @@ public final class Settings {
         public static final String ALLOW_ALL_ROTATIONS = "allow_all_rotations";
 
         /**
+         * Give missed call notifications a breathing effect
+         * @hide
+         */
+        public static final String MISSED_CALL_BREATH = "missed_call_breath";
+
+         /**
+         * Volume key controls ringtone or media sound stream
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -3039,7 +3048,8 @@ public final class Settings {
             POWER_MENU_SILENT_ENABLED,
             CHARGING_LED_ENABLED,
             LOW_BATTERY_LED_PULSE_ENABLED,
-            ALLOW_ALL_ROTATIONS
+            ALLOW_ALL_ROTATIONS,
+            MISSED_CALL_BREATH
         };
 
         // Settings moved to Settings.Secure
