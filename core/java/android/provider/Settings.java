@@ -2961,6 +2961,12 @@ public final class Settings {
          */
         public static final String MISSED_CALL_BREATH = "missed_call_breath";
 
+        /**
+         * Give MMS Notifications a breathing effect
+         * @hide
+         */
+        public static final String MMS_BREATH = "mms_breath";
+
          /**
          * Volume key controls ringtone or media sound stream
 
@@ -3049,7 +3055,8 @@ public final class Settings {
             CHARGING_LED_ENABLED,
             LOW_BATTERY_LED_PULSE_ENABLED,
             ALLOW_ALL_ROTATIONS,
-            MISSED_CALL_BREATH
+            MISSED_CALL_BREATH,
+            MMS_BREATH
         };
 
         // Settings moved to Settings.Secure
