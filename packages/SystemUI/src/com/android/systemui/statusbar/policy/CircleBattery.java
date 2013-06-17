@@ -53,7 +53,6 @@ import com.android.internal.R;
 public class CircleBattery extends ImageView {
     private Handler mHandler;
     private Context mContext;
-    private BatteryReceiver mBatteryReceiver = null;
     private SettingsObserver mObserver;
 
     // state variables
@@ -62,6 +61,7 @@ public class CircleBattery extends ImageView {
     private boolean mPercentage;    // whether or not to show percentage number
     private boolean mIsCharging;    // whether or not device is currently charging
     private int     mLevel;         // current battery level
+    private int     mWarningLevel;  // battery level under which circle should become red
     private int     mAnimOffset;    // current level of charging animation
     private boolean mIsAnimating;   // stores charge-animation status to reliably remove callbacks
     private int     mDockLevel;     // current dock battery level
@@ -77,7 +77,7 @@ public class CircleBattery extends ImageView {
     private Float   mTextY;         // precalculated y position for drawText() to appear vertical-centered
     private Float   mTextRightX;    // precalculated x position for dock battery drawText()
 
-    // quiet a lot of paint variables. helps to move cpu-usage from actual drawing to initialization
+    // quite a lot of paint variables. helps to move cpu-usage from actual drawing to initialization
     private Paint   mPaintFont;
     private Paint   mPaintGray;
     private Paint   mPaintSystem;
@@ -86,7 +86,7 @@ public class CircleBattery extends ImageView {
     // runnable to invalidate view via mHandler.postDelayed() call
     private final Runnable mInvalidate = new Runnable() {
         public void run() {
-            if(mActivated && mAttached) {
+            if (mActivated && mAttached) {
                 invalidate();
             }
         }
@@ -111,10 +111,11 @@ public class CircleBattery extends ImageView {
 
         @Override
         public void onChange(boolean selfChange) {
-            int batteryStyle = (Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.STATUS_BAR_BATTERY, 0));
+            int batteryStyle = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.STATUS_BAR_BATTERY, 0);
 
-            mActivated = (batteryStyle == BatteryController.BATTERY_STYLE_CIRCLE || batteryStyle == BatteryController.BATTERY_STYLE_CIRCLE_PERCENT);
+            mActivated = (batteryStyle == BatteryController.BATTERY_STYLE_CIRCLE
+                    || batteryStyle == BatteryController.BATTERY_STYLE_CIRCLE_PERCENT);
             mPercentage = (batteryStyle == BatteryController.BATTERY_STYLE_CIRCLE_PERCENT);
 
             setVisibility(mActivated ? View.VISIBLE : View.GONE);
@@ -197,7 +198,6 @@ public class CircleBattery extends ImageView {
         mHandler = new Handler();
 
         mObserver = new SettingsObserver(mHandler);
-        mBatteryReceiver = new BatteryReceiver(mContext);
 
         // initialize and setup all paint variables
         // stroke width is later set in initSizeBasedStuff()
@@ -230,7 +230,6 @@ public class CircleBattery extends ImageView {
         if (!mAttached) {
             mAttached = true;
             mObserver.observe();
-            mBatteryReceiver.updateRegistration();
             mHandler.postDelayed(mInvalidate, 250);
         }
     }
@@ -241,11 +240,25 @@ public class CircleBattery extends ImageView {
         if (mAttached) {
             mAttached = false;
             mObserver.unobserve();
-            mBatteryReceiver.updateRegistration();
             mRectLeft = null; // makes sure, size based variables get
                                 // recalculated on next attach
             mCircleSize = 0;    // makes sure, mCircleSize is reread from icons on
                                 // next attach
+        }
+    }
+
+    @Override
+    public void onBatteryLevelChanged(int level, int status) {
+        mLevel = level;
+        mBatteryStatus = status;
+        updateVisibility();
+    }
+
+    protected void updateVisibility() {
+        setVisibility(mActivated && isBatteryPresent() ? View.VISIBLE : View.GONE);
+
+        if (mActivated && mAttached) {
+            invalidate();
         }
     }
 
@@ -277,7 +290,7 @@ public class CircleBattery extends ImageView {
         // draw thin gray ring first
         canvas.drawArc(drawRect, 270, 360, false, mPaintGray);
         // draw colored arc representing charge level
-        canvas.drawArc(drawRect, 270 + animOffset, 3.6f * padLevel, false, usePaint);
+        canvas.drawArc(drawRect, 270 + animOffset, 3.6f * level, false, usePaint);
         // if chosen by options, draw percentage text in the middle
         // always skip percentage when 100, so layout doesnt break
         if (level < 100 && mPercentage) {
@@ -303,7 +316,7 @@ public class CircleBattery extends ImageView {
         }
     }
 
-    /***
+    /**
      * updates the animation counter
      * cares for timed callbacks to continue animation cycles
      * uses mInvalidate for delayed invalidate() callbacks
@@ -330,7 +343,7 @@ public class CircleBattery extends ImageView {
         mHandler.postDelayed(mInvalidate, 50);
     }
 
-    /***
+    /**
      * initializes all size dependent variables
      * sets stroke width and text size of all involved paints
      * YES! i think the method name is appropriate
@@ -367,11 +380,11 @@ public class CircleBattery extends ImageView {
         onMeasure(0, 0);
     }
 
-    /***
+    /**
      * we need to measure the size of the circle battery by checking another
      * resource. unfortunately, those resources have transparent/empty borders
      * so we have to count the used pixel manually and deduct the size from
-     * it. quiet complicated, but the only way to fit properly into the
+     * it. Quite complicated, but the only way to fit properly into the
      * statusbar for all resolutions
      */
     private void initSizeMeasureIconHeight() {
