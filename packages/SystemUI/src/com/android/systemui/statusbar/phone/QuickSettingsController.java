@@ -18,7 +18,6 @@ import com.android.systemui.quicksettings.BugReportTile;
 import com.android.systemui.quicksettings.GPSTile;
 import com.android.systemui.quicksettings.InputMethodTile;
 import com.android.systemui.quicksettings.MobileNetworkTile;
-import com.android.systemui.quicksettings.MobileNetworkTypeTile;
 import com.android.systemui.quicksettings.PreferencesTile;
 import com.android.systemui.quicksettings.QuickSettingsTile;
 import com.android.systemui.quicksettings.RingerModeTile;
@@ -52,14 +51,13 @@ public class QuickSettingsController {
     public static final int GPS_TILE = 9;
     public static final int AUTO_ROTATION_TILE = 10;
     public static final int BRIGHTNESS_TILE = 11;
-    public static final int MOBILE_NETWORK_TYPE_TILE = 12;
-    public static final int PREFERENCES_TILE = 13;
-    public static final int BATTERY_TILE = 14;
-    public static final int IME_TILE = 15;
+    public static final int PREFERENCES_TILE = 12;
+    public static final int BATTERY_TILE = 13;
+    public static final int IME_TILE = 14;
 
-    public static final int ALARM_TILE = 16;
-    public static final int BUG_REPORT_TILE = 17;
-    public static final int WIFI_DISPLAY_TILE = 18;
+    public static final int ALARM_TILE = 15;
+    public static final int BUG_REPORT_TILE = 16;
+    public static final int WIFI_DISPLAY_TILE = 17;
 
     public static final int USER_TILE = 99;
 
@@ -90,9 +88,6 @@ public class QuickSettingsController {
          */
         quicksettings.add(GPS_TILE);
         quicksettings.add(TOGGLE_LOCKSCREEN_TILE);
-
-        // This toggle is still not working:
-        // quicksettings.add(MOBILE_NETWORK_TYPE_TILE);
 
         // Temporary tiles. These toggles must be the last ones added to the view, as they will show only when they are needed
         quicksettings.add(ALARM_TILE);
@@ -155,9 +150,6 @@ public class QuickSettingsController {
                 break;
             case BRIGHTNESS_TILE:
                 qs = new BrightnessTile(mContext, inflater, (QuickSettingsContainerView) mContainerView, this, mHandler);
-                break;
-            case MOBILE_NETWORK_TYPE_TILE:
-                qs = new MobileNetworkTypeTile(mContext, inflater, (QuickSettingsContainerView) mContainerView, this);
                 break;
             case ALARM_TILE:
                 qs = new AlarmTile(mContext, inflater, (QuickSettingsContainerView) mContainerView, this, mHandler);
