@@ -4,6 +4,8 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.hardware.Camera;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.WifiDisplayStatus;
 import android.net.ConnectivityManager;
@@ -38,5 +40,9 @@ public class QSUtils {
 
         public static boolean deviceSupportsNfc(Context ctx) {
             return NfcAdapter.getDefaultAdapter(ctx) != null;
+        }
+
+        public static boolean deviceSupportsCamera() {
+            return Camera.getNumberOfCameras() > 0;
         }
 }

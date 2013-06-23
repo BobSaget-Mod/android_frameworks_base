@@ -22,6 +22,7 @@ import static com.android.internal.util.sm.QSConstants.TILE_AUTOROTATE;
 import static com.android.internal.util.sm.QSConstants.TILE_BATTERY;
 import static com.android.internal.util.sm.QSConstants.TILE_BLUETOOTH;
 import static com.android.internal.util.sm.QSConstants.TILE_BRIGHTNESS;
+import static com.android.internal.util.sm.QSConstants.TILE_CAMERA;
 import static com.android.internal.util.sm.QSConstants.TILE_DELIMITER;
 import static com.android.internal.util.sm.QSConstants.TILE_EXPANDEDDESKTOP;
 import static com.android.internal.util.sm.QSConstants.TILE_GPS;
@@ -59,6 +60,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 
+import com.android.internal.util.sm.QSUtils;
 import com.android.systemui.quicksettings.AirplaneModeTile;
 import com.android.systemui.quicksettings.AlarmTile;
 import com.android.systemui.quicksettings.AutoRotateTile;
@@ -66,6 +68,7 @@ import com.android.systemui.quicksettings.BatteryTile;
 import com.android.systemui.quicksettings.BluetoothTile;
 import com.android.systemui.quicksettings.BrightnessTile;
 import com.android.systemui.quicksettings.BugReportTile;
+import com.android.systemui.quicksettings.CameraTile;
 import com.android.systemui.quicksettings.ExpandedDesktopTile;
 import com.android.systemui.quicksettings.GPSTile;
 import com.android.systemui.quicksettings.InputMethodTile;
@@ -141,8 +144,9 @@ public class QuickSettingsController {
         mIMETile = null;
 
         // Filter items not compatible with device
-        boolean bluetoothSupported = deviceSupportsBluetooth();
-        boolean telephonySupported = deviceSupportsTelephony(mContext);
+        boolean telephonySupported = QSUtils.deviceSupportsTelephony(mContext);
+        boolean cameraSupported = QSUtils.deviceSupportsCamera();
+        boolean bluetoothSupported = QSUtils.deviceSupportsBluetooth();
 
         if (!bluetoothSupported) {
             TILES_DEFAULT.remove(TILE_BLUETOOTH);
@@ -182,6 +186,8 @@ public class QuickSettingsController {
                 qs = new BluetoothTile(mContext, inflater, mContainerView, this);
             } else if (tile.equals(TILE_BRIGHTNESS)) {
                 qs = new BrightnessTile(mContext, inflater, mContainerView, this, mHandler);
+            } else if (tile.equals(TILE_CAMERA) && cameraSupported) {
+                qs = new CameraTile(mContext, this, mHandler);
             } else if (tile.equals(TILE_RINGER)) {
                 qs = new RingerModeTile(mContext, inflater, mContainerView, this);
             } else if (tile.equals(TILE_SYNC)) {
@@ -213,7 +219,7 @@ public class QuickSettingsController {
                 qs = new VolumeTile(mContext, inflater, mContainerView, this, mHandler);
             } else if (tile.equals(TILE_EXPANDEDDESKTOP)) {
                 mTileStatusUris.add(Settings.System.getUriFor(Settings.System.EXPANDED_DESKTOP_STYLE));
-                if (expandedDesktopEnabled(resolver)) {
+                if (QSUtils.expandedDesktopEnabled(resolver)) {
                     qs = new ExpandedDesktopTile(mContext, inflater, mContainerView, this, mHandler);
                 }
             }
@@ -250,6 +256,11 @@ public class QuickSettingsController {
         if (deviceSupportsUsbTether(mContext) && Settings.System.getInt(resolver, Settings.System.QS_DYNAMIC_USBTETHER, 1) == 1) {
             QuickSettingsTile qs = new UsbTetherTile(mContext, inflater, mContainerView, this);
             qs.setupQuickSettingsTile();
+        }
+        if (QSUtils.deviceSupportsUsbTether(mContext) && Settings.System.getIntForUser(resolver,
+                    Settings.System.QS_DYNAMIC_USBTETHER, 1, UserHandle.USER_CURRENT) == 1) {
+            QuickSettingsTile qs = new UsbTetherTile(mContext, this);
+            qs.setupQuickSettingsTile(inflater, mContainerView);
             mQuickSettingsTiles.add(qs);
         }
     }
