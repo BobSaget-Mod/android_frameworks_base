@@ -41,7 +41,6 @@ public abstract class PowerButton {
     public static final String BUTTON_SCREENTIMEOUT = "toggleScreenTimeout";
     public static final String BUTTON_MOBILEDATA = "toggleMobileData";
     public static final String BUTTON_LOCKSCREEN = "toggleLockScreen";
-    public static final String BUTTON_NETWORKMODE = "toggleNetworkMode";
     public static final String BUTTON_AUTOROTATE = "toggleAutoRotate";
     public static final String BUTTON_AIRPLANE = "toggleAirplane";
     public static final String BUTTON_FLASHLIGHT = "toggleFlashlight";

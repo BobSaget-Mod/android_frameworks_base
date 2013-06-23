@@ -81,7 +81,6 @@ public class PowerWidget extends FrameLayout {
         sPossibleButtons.put(PowerButton.BUTTON_SCREENTIMEOUT, ScreenTimeoutButton.class);
         sPossibleButtons.put(PowerButton.BUTTON_MOBILEDATA, MobileDataButton.class);
         sPossibleButtons.put(PowerButton.BUTTON_LOCKSCREEN, LockScreenButton.class);
-        sPossibleButtons.put(PowerButton.BUTTON_NETWORKMODE, NetworkModeButton.class);
         sPossibleButtons.put(PowerButton.BUTTON_AUTOROTATE, AutoRotateButton.class);
         sPossibleButtons.put(PowerButton.BUTTON_AIRPLANE, AirplaneButton.class);
         sPossibleButtons.put(PowerButton.BUTTON_FLASHLIGHT, FlashlightButton.class);
