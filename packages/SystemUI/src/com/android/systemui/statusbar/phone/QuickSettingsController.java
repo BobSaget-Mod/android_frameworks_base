@@ -24,6 +24,7 @@ import com.android.systemui.quicksettings.RingerModeTile;
 import com.android.systemui.quicksettings.RingerVibrationModeTile;
 import com.android.systemui.quicksettings.SleepScreenTile;
 import com.android.systemui.quicksettings.ToggleLockscreenTile;
+import com.android.systemui.quicksettings.UserTile;
 import com.android.systemui.quicksettings.VibrationModeTile;
 import com.android.systemui.quicksettings.WiFiDisplayTile;
 import com.android.systemui.quicksettings.WiFiTile;
@@ -169,6 +170,9 @@ public class QuickSettingsController {
             case IME_TILE:
                 IMETile = new InputMethodTile(mContext, inflater, (QuickSettingsContainerView) mContainerView, this);
                 qs = IMETile;
+                break;
+            case USER_TILE:
+                qs = new UserTile(mContext, inflater, (QuickSettingsContainerView) mContainerView, this);
                 break;
             }
             if(qs != null){
