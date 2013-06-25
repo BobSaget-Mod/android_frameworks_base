@@ -32,9 +32,11 @@ public class MobileNetworkTile extends QuickSettingsTile implements NetworkSigna
 
     private ConnectivityManager mCm;
 
-    public MobileNetworkTile(Context context, QuickSettingsController qsc) {
-        super(context, qsc, R.layout.quick_settings_tile_rssi);
+    public MobileNetworkTile(Context context, LayoutInflater inflater,
+            QuickSettingsContainerView container, QuickSettingsController qsc) {
+        super(context, inflater, container, qsc);
 
+        mTileLayout = R.layout.quick_settings_tile_rssi;
         mCm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         mOnClick = new View.OnClickListener() {

@@ -17,8 +17,9 @@ public class AirplaneModeTile extends QuickSettingsTile implements NetworkSignal
 
     private boolean enabled = false;
 
-    public AirplaneModeTile(Context context, QuickSettingsController qsc) {
-        super(context, qsc);
+    public AirplaneModeTile(Context context, LayoutInflater inflater,
+            QuickSettingsContainerView container, QuickSettingsController qsc) {
+        super(context, inflater, container, qsc);
 
         mOnClick = new View.OnClickListener() {
             @Override

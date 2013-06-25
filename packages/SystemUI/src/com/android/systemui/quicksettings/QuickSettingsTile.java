@@ -24,37 +24,40 @@ import com.android.systemui.statusbar.phone.QuickSettingsTileView;
 public class QuickSettingsTile implements OnClickListener {
 
     protected final Context mContext;
+    protected final ViewGroup mContainerView;
+    protected final LayoutInflater mInflater;
     protected QuickSettingsTileView mTile;
     protected OnClickListener mOnClick;
     protected OnLongClickListener mOnLongClick;
-    protected final int mTileLayout;
+    protected int mTileLayout;
     protected int mDrawable;
     protected String mLabel;
     protected PhoneStatusBar mStatusbarService;
     protected QuickSettingsController mQsc;
 
-
-    public QuickSettingsTile(Context context, QuickSettingsController qsc) {
-        this(context, qsc, R.layout.quick_settings_tile_generic);
-    }
-
-    public QuickSettingsTile(Context context, QuickSettingsController qsc, int layout) {
+    public QuickSettingsTile(Context context, LayoutInflater inflater, QuickSettingsContainerView container, QuickSettingsController qsc) {
         mContext = context;
+        mContainerView = container;
+        mInflater = inflater;
         mDrawable = R.drawable.ic_notifications;
         mLabel = mContext.getString(R.string.quick_settings_label_enabled);
         mStatusbarService = qsc.mStatusBarService;
         mQsc = qsc;
-        mTileLayout = layout;
+        mTileLayout = R.layout.quick_settings_tile_generic;
     }
 
-    public void setupQuickSettingsTile(LayoutInflater inflater, QuickSettingsContainerView container) {
-        mTile = (QuickSettingsTileView) inflater.inflate(R.layout.quick_settings_tile, container, false);
-        mTile.setContent(mTileLayout, inflater);
-        container.addView(mTile);
+    public void setupQuickSettingsTile(){
+        createQuickSettings();
         onPostCreate();
         updateQuickSettings();
         mTile.setOnClickListener(this);
         mTile.setOnLongClickListener(mOnLongClick);
+    }
+
+    void createQuickSettings(){
+        mTile = (QuickSettingsTileView) mInflater.inflate(R.layout.quick_settings_tile, mContainerView, false);
+        mTile.setContent(mTileLayout, mInflater);
+        mContainerView.addView(mTile);
     }
 
     void onPostCreate(){}

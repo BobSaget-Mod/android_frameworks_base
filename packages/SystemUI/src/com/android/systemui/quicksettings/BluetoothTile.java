@@ -20,8 +20,9 @@ public class BluetoothTile extends QuickSettingsTile implements BluetoothStateCh
     private boolean connected = false;
     private BluetoothAdapter mBluetoothAdapter;
 
-    public BluetoothTile(Context context, QuickSettingsController qsc) {
-        super(context, qsc);
+    public BluetoothTile(Context context, LayoutInflater inflater,
+            QuickSettingsContainerView container, QuickSettingsController qsc) {
+        super(context, inflater, container, qsc);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         enabled = mBluetoothAdapter.isEnabled();
         connected = mBluetoothAdapter.getConnectionState() == BluetoothAdapter.STATE_CONNECTED;

@@ -17,8 +17,9 @@ import com.android.systemui.statusbar.phone.QuickSettingsContainerView;
 
 public class AutoRotateTile extends QuickSettingsTile {
 
-    public AutoRotateTile(Context context, QuickSettingsController qsc, Handler handler) {
-        super(context, qsc);
+    public AutoRotateTile(Context context, LayoutInflater inflater,
+            QuickSettingsContainerView container, QuickSettingsController qsc, Handler handler) {
+        super(context, inflater, container, qsc);
 
         mOnClick = new OnClickListener() {
             @Override

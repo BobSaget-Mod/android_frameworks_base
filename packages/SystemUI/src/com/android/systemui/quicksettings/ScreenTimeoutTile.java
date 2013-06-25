@@ -28,8 +28,9 @@ public class ScreenTimeoutTile extends QuickSettingsTile {
     private static final int CM_MODE_15_60_300 = 0;
     private static final int CM_MODE_30_120_300 = 1;
 
-    public ScreenTimeoutTile(Context context, QuickSettingsController qsc) {
-        super(context, qsc);
+    public ScreenTimeoutTile(Context context,
+            LayoutInflater inflater, QuickSettingsContainerView container, QuickSettingsController qsc) {
+        super(context, inflater, container, qsc);
 
         mOnClick = new OnClickListener() {
             @Override

@@ -16,8 +16,9 @@ public class WifiAPTile extends QuickSettingsTile {
 
     private static WifiManager mWifiManager;
 
-    public WifiAPTile(Context context, QuickSettingsController qsc) {
-        super(context, qsc);
+    public WifiAPTile(Context context, LayoutInflater inflater,
+            QuickSettingsContainerView container, QuickSettingsController qsc) {
+        super(context, inflater, container, qsc);
 
         mWifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
 
