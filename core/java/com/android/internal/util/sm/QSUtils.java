@@ -4,7 +4,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.WifiDisplayStatus;
 import android.net.ConnectivityManager;
@@ -12,11 +11,6 @@ import android.nfc.NfcAdapter;
 import android.provider.Settings;
 
 public class QSUtils {
-        public static boolean deviceSupportsImeSwitcher(Context ctx) {
-            Resources res = ctx.getResources();
-            return res.getBoolean(com.android.internal.R.bool.config_show_cmIMESwitcher);
-        }
-
         public static boolean deviceSupportsUsbTether(Context ctx) {
             ConnectivityManager cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
             return (cm.getTetherableUsbRegexs().length != 0);
