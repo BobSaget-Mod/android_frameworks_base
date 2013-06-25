@@ -45,11 +45,6 @@ public abstract class PowerButton {
     public static final String BUTTON_AIRPLANE = "toggleAirplane";
     public static final String BUTTON_FLASHLIGHT = "toggleFlashlight";
     public static final String BUTTON_SLEEP = "toggleSleepMode";
-    public static final String BUTTON_MEDIA_PLAY_PAUSE = "toggleMediaPlayPause";
-    public static final String BUTTON_MEDIA_PREVIOUS = "toggleMediaPrevious";
-    public static final String BUTTON_MEDIA_NEXT = "toggleMediaNext";
-    public static final String BUTTON_LTE = "toggleLte";
-    public static final String BUTTON_WIMAX = "toggleWimax";
     public static final String BUTTON_UNKNOWN = "unknown";
     private static final String SEPARATOR = "OV=I=XseparatorX=I=VO";
     private static final Mode MASK_MODE = Mode.SCREEN;
