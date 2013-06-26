@@ -23,8 +23,9 @@ public class ToggleLockscreenTile extends QuickSettingsTile {
     private boolean mDisabledLockscreen;
     private SharedPreferences mPrefs;
 
-    public ToggleLockscreenTile(Context context, QuickSettingsController qsc) {
-        super(context, qsc);
+    public ToggleLockscreenTile(Context context,
+            LayoutInflater inflater, QuickSettingsContainerView container, QuickSettingsController qsc) {
+        super(context, inflater, container, qsc);
 
         mPrefs = mContext.getSharedPreferences("PowerButton-" + PowerButton.BUTTON_LOCKSCREEN, Context.MODE_PRIVATE);
         mDisabledLockscreen = mPrefs.getBoolean(KEY_DISABLED, false);
