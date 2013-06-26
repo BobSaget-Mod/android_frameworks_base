@@ -2877,6 +2877,12 @@ public final class Settings {
         public static final String QS_COLLAPSE_PANEL = "qs_collapse_panel";
 
         /**
+         * To enable full 180 degrees rotation or not
+         * @hide
+         */
+        public static final String ALLOW_ALL_ROTATIONS = "allow_all_rotations";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -2959,7 +2965,8 @@ public final class Settings {
             POWER_MENU_AIRPLANE_ENABLED,
             POWER_MENU_SILENT_ENABLED,
             CHARGING_LED_ENABLED,
-            LOW_BATTERY_LED_PULSE_ENABLED
+            LOW_BATTERY_LED_PULSE_ENABLED,
+            ALLOW_ALL_ROTATIONS
         };
 
         // Settings moved to Settings.Secure

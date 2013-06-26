@@ -585,6 +585,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.NAV_BUTTONS_HEIGHT), false, this,
                     UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.ALLOW_ALL_ROTATIONS), false, this,
+                    UserHandle.USER_ALL);
             updateSettings();
         }
 
@@ -1247,6 +1250,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 mExpandedDesktopStyle = expandedDesktopStyle;
                 updateDisplayMetrics = true;
             }
+
+            mAllowAllRotations = Settings.System.getIntForUser(resolver,
+                    Settings.System.ALLOW_ALL_ROTATIONS, -1, UserHandle.USER_CURRENT);
 
             // Configure rotation lock.
             int userRotation = Settings.System.getIntForUser(resolver,
