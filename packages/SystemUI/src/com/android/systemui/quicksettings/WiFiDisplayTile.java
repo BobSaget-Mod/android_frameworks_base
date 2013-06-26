@@ -17,9 +17,10 @@ public class WiFiDisplayTile extends QuickSettingsTile{
     private boolean enabled = false;
     private boolean connected = false;
 
-    public WiFiDisplayTile(Context context, 
+    public WiFiDisplayTile(Context context, LayoutInflater inflater,
+            QuickSettingsContainerView container,
             QuickSettingsController qsc) {
-        super(context, qsc);
+        super(context, inflater, container, qsc);
 
         mOnClick = new OnClickListener() {
 

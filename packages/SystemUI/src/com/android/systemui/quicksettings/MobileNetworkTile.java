@@ -23,7 +23,6 @@ public class MobileNetworkTile extends QuickSettingsTile implements NetworkSigna
     private static final int NO_OVERLAY = 0;
     private static final int DISABLED_OVERLAY = -1;
 
-    private NetworkController mController;
     private boolean mEnabled;
     private String mDescription;
     private int mDataTypeIconId = NO_OVERLAY;
@@ -33,10 +32,11 @@ public class MobileNetworkTile extends QuickSettingsTile implements NetworkSigna
 
     private ConnectivityManager mCm;
 
-    public MobileNetworkTile(Context context, QuickSettingsController qsc, NetworkController controller) {
-        super(context, qsc, R.layout.quick_settings_tile_rssi);
+    public MobileNetworkTile(Context context, LayoutInflater inflater,
+            QuickSettingsContainerView container, QuickSettingsController qsc) {
+        super(context, inflater, container, qsc);
 
-        mController = controller;
+        mTileLayout = R.layout.quick_settings_tile_rssi;
         mCm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         mOnClick = new View.OnClickListener() {
@@ -67,15 +67,10 @@ public class MobileNetworkTile extends QuickSettingsTile implements NetworkSigna
 
     @Override
     void onPostCreate() {
-        mController.addNetworkSignalChangedCallback(this);
+        NetworkController controller = new NetworkController(mContext);
+        controller.addNetworkSignalChangedCallback(this);
         updateTile();
         super.onPostCreate();
-    }
-
-    @Override
-    public void onDestroy() {
-        mController.removeNetworkSignalChangedCallback(this);
-        super.onDestroy();
     }
 
     @Override

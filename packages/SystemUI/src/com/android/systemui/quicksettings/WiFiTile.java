@@ -13,17 +13,15 @@ import com.android.systemui.statusbar.policy.NetworkController;
 import com.android.systemui.statusbar.policy.NetworkController.NetworkSignalChangedCallback;
 
 public class WiFiTile extends QuickSettingsTile implements NetworkSignalChangedCallback{
-    private NetworkController mController;
+
     private boolean mWifiConnected;
     private boolean mWifiNotConnected;
     private int mWifiSignalIconId;
     private String mDescription;
 
-    public WiFiTile(Context context, QuickSettingsController qsc, NetworkController controller) {
-        super(context, qsc);
-
-        mController = controller;
-
+    public WiFiTile(Context context, LayoutInflater inflater,
+            QuickSettingsContainerView container, QuickSettingsController qsc) {
+        super(context, inflater, container, qsc);
         mOnClick = new View.OnClickListener() {
 
             @Override
@@ -44,15 +42,10 @@ public class WiFiTile extends QuickSettingsTile implements NetworkSignalChangedC
 
     @Override
     void onPostCreate() {
-        mController.addNetworkSignalChangedCallback(this);
+        NetworkController controller = new NetworkController(mContext);
+        controller.addNetworkSignalChangedCallback(this);
         updateTile();
         super.onPostCreate();
-    }
-
-    @Override
-    public void onDestroy() {
-        mController.removeNetworkSignalChangedCallback(this);
-        super.onDestroy();
     }
 
     @Override
