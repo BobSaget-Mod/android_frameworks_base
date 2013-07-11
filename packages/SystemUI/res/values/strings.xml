@@ -438,8 +438,11 @@
     <!-- Notification text: when GPS has found a fix [CHAR LIMIT=50] -->
     <string name="gps_notification_found_text">Location set by GPS</string>
 
+    <!-- HALO -->
     <!-- Content description of the halo button in the notification panel for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_halo">Create notification halo.</string>
+    <string name="halo_dismiss">Dismiss notification</string>
+    <string name="halo_hide">Hide HALO</string>
 
     <!-- Content description of the clear button in the notification panel for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_clear_all">Clear all notifications.</string>
@@ -592,4 +595,5 @@
     <string name="pie_phone_status_emergency_only">Emergency calls only</string>
 
     <string name="powerwidget_screen_timeout_toast">Screen timeout set to: %1$d %2$s</string>
+
 </resources>
