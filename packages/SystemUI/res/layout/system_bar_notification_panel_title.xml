@@ -221,16 +221,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:textAppearance="@style/TextAppearance.SystemBar.Expanded.Date"
-            />
+            android:textAppearance="@style/TextAppearance.SystemBar.Expanded.Date" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_weight="1"
-            />
+            android:layout_weight="1"/>
 
-        <ImageView android:id="@+id/clear_all_button"
+        <ImageView android:id="@+id/halo_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="center"
